@@ -2,6 +2,47 @@
 
 <PropertyList>
   <path>Models/Effects/procedural_light.ac</path>
+  
+  <light>
+      <name>taxi</name>
+      <type>spot</type>
+      <position>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+      </position>
+      <direction>
+        <x>-1.0</x>
+        <y>0</y>
+        <z>-0.025</z>
+      </direction>
+      <ambient>
+        <r>0.00</r>
+        <g>0.0</g>
+        <b>0.0</b>
+        <a>1</a>
+      </ambient>
+      <diffuse>
+        <r>0.95</r>
+        <g>0.9</g>
+        <b>0.9</b>
+        <a>1</a>
+      </diffuse>
+      <specular>
+        <r>0.95</r>
+        <g>0.9</g>
+        <b>0.9</b>
+        <a>1</a>
+      </specular>
+      <attenuation>
+        <c>1.0</c>
+        <l>0.000000</l>
+        <q>0.000000</q>
+      </attenuation>
+      <spot-exponent>20</spot-exponent>
+      <spot-cutoff>35</spot-cutoff>
+      <range-m>100</range-m>
+  </light>
 
   <effect>
     <inherits-from>Aircraft/JA37/Models/Effects/proc-als-lights/taxi-light</inherits-from>
@@ -11,6 +52,7 @@
   <animation>
     <type>select</type>
     <object-name>procedural_light</object-name>
+    <object-name>taxi</object-name>
     <condition>
       <property>sim/multiplay/generic/bool[1]</property> <!-- ja37/effect/taxi-light  -->
     </condition>
@@ -29,4 +71,6 @@
     <type>noshadow</type>
     <object-name>procedural_light</object-name>
   </animation>
+  
+  
 </PropertyList>

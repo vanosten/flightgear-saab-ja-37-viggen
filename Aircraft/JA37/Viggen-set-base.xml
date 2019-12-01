@@ -447,11 +447,11 @@
             </generic>
             <visibility-range-nm type="int">100</visibility-range-nm><!-- hint to MP server for how far away MP planes should transmit to this aircraft -->
         </multiplay>
-        <hitches>
+        <!--<hitches>
             <aerotow>
-                <is-slave alias="/fdm/jsbsim/structural/wings/serviceable"/> <!-- to show detachment of wings - deprecated -->
-            </aerotow>
-        </hitches>
+                <is-slave alias="/fdm/jsbsim/structural/wings/serviceable"/> --><!-- to show detachment of wings - deprecated -->
+            <!--</aerotow>
+        </hitches>-->
 
 
         <!--**********************************************************************
