@@ -31,6 +31,9 @@ uniform float   latDeg;
 uniform float   lonDeg;
 varying vec3 upInView;
 uniform mat4 osg_ViewMatrix;
+varying vec4 ecPosition;
+
+void setupShadows(vec4 eyeSpacePos);//Compositor
 
 //////Fog Include///////////
 // uniform	int 	fogType;
@@ -89,7 +92,7 @@ void	main(void)
 {
 	    upInView = upInViewSpace(latDeg,lonDeg);
 		rawpos = gl_Vertex.xyz;
-		vec4 ecPosition = gl_ModelViewMatrix * gl_Vertex;
+		ecPosition = gl_ModelViewMatrix * gl_Vertex;
 		//fog_Func(fogType);
 
 		VNormal = normalize(gl_NormalMatrix * gl_Normal);
@@ -160,4 +163,6 @@ void	main(void)
 		
 		gl_Position = ftransform();
 		gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+		
+		setupShadows(ecPosition);//Compositor
 }

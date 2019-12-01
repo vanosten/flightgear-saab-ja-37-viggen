@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <!--
 License: GPL v2
 Author: Nikolai V. Chr.
@@ -59,6 +60,14 @@ Author: Nikolai V. Chr.
     		<use_IR_vision><use>/sim/rendering/als-filters/use-IR-vision</use></use_IR_vision>
 		<display_xsize><use>/sim/startup/xsize</use></display_xsize>
 		<display_ysize><use>/sim/startup/ysize</use></display_ysize>
+		<!-- BEGIN shadows include -->
+	    <shadows_enabled>
+	      <use>/sim/rendering/als/shadows/enabled</use>
+	    </shadows_enabled>
+	    <sun_atlas_size>
+	      <use>/sim/rendering/als/shadows/sun-atlas-size</use>
+	    </sun_atlas_size>
+	    <!-- END shadows include -->
 	</parameters>
 	<technique n="3">
 		<predicate>
@@ -169,6 +178,7 @@ Author: Nikolai V. Chr.
 			   </or>
 		   </and>
 	    </predicate>
+	    <scheme>als-lighting</scheme>
 		<pass>
 			<lighting>true</lighting>
 			<material>
@@ -264,8 +274,10 @@ Author: Nikolai V. Chr.
 			<program>
 				<vertex-shader n="0">Aircraft/JA37/Models/Effects/displays/lcd.vert</vertex-shader>
 				<fragment-shader n="0">Aircraft/JA37/Models/Effects/displays/lcd.frag</fragment-shader>
-				<fragment-shader n="1">Shaders/noise.frag</fragment-shader>
-				<fragment-shader n="2">Shaders/filters-ALS.frag</fragment-shader>
+				<fragment-shader n="1">Shaders/ALS/noise.frag</fragment-shader>
+				<fragment-shader n="2">Shaders/ALS/filters.frag</fragment-shader>
+				<vertex-shader n="1">Compositor/Shaders/ALS/shadows-include.vert</vertex-shader>
+        		<fragment-shader n="3">Compositor/Shaders/ALS/shadows-include.frag</fragment-shader>
 			</program>
 			<uniform>
 			   <name>BaseTex</name>
@@ -374,6 +386,27 @@ Author: Nikolai V. Chr.
 				  <type>int</type>
 				  <value><use>display_ysize</use></value>
 		   </uniform> 
+		   <!-- BEGIN shadows include -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>shadows_enabled</name>
+        <type>bool</type>
+        <value>
+          <use>shadows_enabled</use>
+        </value>
+      </uniform>
+      <uniform>
+        <name>sun_atlas_size</name>
+        <type>int</type>
+        <value>
+          <use>sun_atlas_size</use>
+        </value>
+      </uniform>
+      <!-- END shadows include -->
 		</pass>
 	</technique>
 	<technique n="13"><!-- default non-shader rendering -->

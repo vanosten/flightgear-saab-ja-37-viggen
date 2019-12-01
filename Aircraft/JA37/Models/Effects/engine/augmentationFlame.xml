@@ -22,10 +22,52 @@
     <type>noshadow</type>
     <object-name>Bounding_box</object-name>
   </animation>
+  
+  <light>
+      <name>shimmer</name>
+      <type>point</type>
+      <position>
+        <x-m>2</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+      </position>
+      <direction>
+        <x>-1.0</x>
+        <y>0</y>
+        <z>-0.025</z>
+      </direction>
+      <ambient>
+        <r>0.00</r>
+        <g>0.0</g>
+        <b>0.0</b>
+        <a>1</a>
+      </ambient>
+      <diffuse>
+        <r>0.85</r>
+        <g>0.35</g>
+        <b>0.25</b>
+        <a>1</a>
+      </diffuse>
+      <specular>
+        <r>0.85</r>
+        <g>0.35</g>
+        <b>0.25</b>
+        <a>1</a>
+      </specular>
+      <attenuation>
+        <c>1.0</c>
+        <l>1.25</l>
+        <q>0.30</q>
+      </attenuation>
+      <spot-exponent>50</spot-exponent>
+      <spot-cutoff>35</spot-cutoff>
+      <range-m>10</range-m>
+  </light>
 
   <animation>
     <type>select</type>
     <object-name>Bounding_box</object-name>
+    <object-name>shimmer</object-name>
     <nopreview/>
     <condition>
      <property>/sim/rendering/shaders/skydome</property><!-- als -->
