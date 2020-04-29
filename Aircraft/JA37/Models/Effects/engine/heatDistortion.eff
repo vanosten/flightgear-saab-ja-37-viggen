@@ -90,7 +90,7 @@
       <program>
         <vertex-shader>thrustheat-ALS.vert</vertex-shader>
         <fragment-shader>thrustheat-ALS.frag</fragment-shader>
-        <fragment-shader>Shaders/noise.frag</fragment-shader>
+        <fragment-shader>Shaders/ALS/noise.frag</fragment-shader>
       </program>
 
      <uniform>
