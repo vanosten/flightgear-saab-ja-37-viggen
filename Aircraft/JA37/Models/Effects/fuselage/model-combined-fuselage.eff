@@ -36,7 +36,6 @@ Modifications author: Nikolai V. Chr.
 	<technique n="4"><!-- ALS -->
 	   <predicate>
 		   <and>
-			   <property>/sim/rendering/shaders/skydome</property>
 			   <property>/sim/rendering/shaders/quality-level</property>
 			   <property>/sim/rendering/shaders/model</property>
 			   <or>
@@ -283,8 +282,8 @@ Modifications author: Nikolai V. Chr.
 				<fragment-shader n="3">Shaders/ALS/secondary_lights.frag</fragment-shader>
 				<fragment-shader n="4">Shaders/ALS/noise.frag</fragment-shader>
 				<fragment-shader n="5">Shaders/ALS/filters.frag</fragment-shader>
-				<vertex-shader n="1">Compositor/Shaders/ALS/shadows-include.vert</vertex-shader>
-        		<fragment-shader n="6">Compositor/Shaders/ALS/shadows-include.frag</fragment-shader>
+				<vertex-shader n="1">Shaders/ALS/shadows-include.vert</vertex-shader>
+				<fragment-shader n="6">Shaders/ALS/shadows-include.frag</fragment-shader>
         		<fragment-shader n="7">Shaders/ALS/clustered-include.frag</fragment-shader>
 		        <uniform-block-binding>
 		          <name>PointLightBlock</name>
