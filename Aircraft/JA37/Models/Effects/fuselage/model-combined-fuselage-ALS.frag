@@ -21,8 +21,9 @@ varying vec3	vertVec;
 
 //varying	float	alpha;
 
-varying float	flogz;
-uniform float	fg_Fcoef;
+varying float flogz;
+
+uniform float fg_Fcoef;
 
 uniform sampler2D BaseTex;
 uniform sampler2D LightMapTex;
