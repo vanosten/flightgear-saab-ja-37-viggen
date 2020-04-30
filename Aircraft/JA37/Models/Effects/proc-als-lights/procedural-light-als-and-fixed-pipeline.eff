@@ -32,7 +32,7 @@
     <terminator><use>/environment/terminator-relative-position-m</use></terminator>
 </parameters>
 
-<technique n="4">
+<technique n="19">
   <scheme>als-lighting</scheme>
     <predicate>
       <and>
@@ -220,7 +220,7 @@
   
   
   
-  <technique n="5">
+  <technique n="4">
     <predicate>
       <and>
         <or>

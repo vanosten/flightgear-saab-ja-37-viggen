@@ -29,7 +29,7 @@
 
   </parameters>
   
-<technique n="4">
+<technique n="19">
   <scheme>als-lighting</scheme>
     <predicate>
       <and>

@@ -33,7 +33,7 @@ Modifications author: Nikolai V. Chr.
 		TODO:
 			should fog, haze be done in linear or gamma corrected space?
 	-->
-	<technique n="4"><!-- ALS -->
+	<technique n="7"><!-- ALS -->
 	   <predicate>
 		   <and>
 			   <property>/sim/rendering/shaders/quality-level</property>
@@ -1169,30 +1169,11 @@ Modifications author: Nikolai V. Chr.
         </value>
       </uniform>
       <!-- END shadows include -->
-		  
-		  <!--<uniform>
-			<name>rembrandt_enabled</name>
-			<type>int</type>
-			<value>
-			  <use>rembrandt</use>
-			</value>
-		  </uniform>-->
 		  </pass>
 	</technique>
 
-	<!-- normal map should not be enabled in rembrandt, but this method dont work.
-	<technique n="7">
-		<pass n="0">
-			<uniform>
-				<name>nmap_enabled</name>
-				<type>int</type>
-				<value>0</value>
-			</uniform>
-		</pass>
-	</technique>-->
-
 	<!-- Default rendering -->
-	<technique n="9">
+	<technique n="4">
 	  <predicate>
 		<and>
 		  <property>/sim/rendering/shaders/quality-level</property>
@@ -1783,13 +1764,6 @@ Modifications author: Nikolai V. Chr.
 				</value>
 		  	</uniform>
 		  <!-- 			END fog include -->
-		  <!--<uniform>
-			<name>rembrandt_enabled</name>
-			<type>int</type>
-			<value>
-			  <use>rembrandt</use>
-			</value>
-		  </uniform>-->
 		  </pass>
 		</technique>
 
