@@ -15,6 +15,9 @@ varying	vec3 	rawpos;
 varying vec3	eyeVec;
 varying vec3	eyeDir;
 
+varying float	flogz;
+uniform float	fg_Fcoef;
+
 uniform sampler2D	BaseTex;
 uniform sampler2D	LightMapTex;
 uniform sampler2D	NormalTex;
@@ -309,6 +312,8 @@ void main (void)
     fragColor.rgb = max(gl_FrontMaterial.emission.rgb*texel.rgb, fragColor.rgb);//this should be sum, not max. And be before gamma line. Will change later when am in mood to tune the uses of this.
     
 	gl_FragColor = fragColor;
+	// logarithmic depth
+	gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 }
 // TODO: Add compositor shadows
 //       Make it play nicer with the 2 types of transparency:

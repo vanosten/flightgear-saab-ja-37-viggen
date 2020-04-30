@@ -16,6 +16,8 @@ varying vec3 	vertVec;
 
 //varying	float	alpha;
 
+varying float	flogz;
+
 attribute	vec3	tangent;
 attribute	vec3	binormal;
 
@@ -163,6 +165,7 @@ void	main(void)
 		
 		gl_Position = ftransform();
 		gl_TexCoord[0] = gl_TextureMatrix[0] * gl_MultiTexCoord0;
+		flogz = 1.0 + gl_Position.w;
 		
 		setupShadows(ecPosition);//Compositor
 }

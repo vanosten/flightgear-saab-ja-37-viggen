@@ -5,6 +5,10 @@
 varying vec3    VNormal;
 varying vec3    eyeVec;
 
+varying float   flogz;
+
+uniform float   fg_Fcoef;
+
 uniform sampler2D BaseTex;
 uniform sampler2D dust_texture;
 uniform float dirt_factor;
@@ -113,4 +117,6 @@ void main (void) {
     } else {
         gl_FragColor = vec4(pow(color,gamma), texel.a);
     }
+    // logarithmic depth
+    gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 }

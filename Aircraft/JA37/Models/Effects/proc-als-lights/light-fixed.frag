@@ -1,6 +1,8 @@
 // -*-C++-*-
 #version 120
 
+uniform float fg_Fcoef;
+
 uniform sampler2D texture;
 
 uniform float light_color_base_r;
@@ -36,6 +38,8 @@ uniform bool is_strobe;
 varying vec3 vertex;
 varying vec3 relPos;
 varying vec3 normal;
+
+varying float flogz;
 
 float Noise2D(in vec2 coord, in float wavelength);
 vec3 fog_Func(vec3 color, int type);
@@ -242,6 +246,7 @@ vec3 light_color = mix(light_color_base, light_color_center, intensity*intensity
 
 
 gl_FragColor =   vec4 (light_color.rgb, intensity * transmission );
-
+// logarithmic depth
+gl_FragDepth = log2(flogz) * fg_Fcoef * 0.5;
 
 }
