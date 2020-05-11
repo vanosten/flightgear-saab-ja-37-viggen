@@ -682,8 +682,6 @@ void main (void)
 	hazeColor.rgb = max(hazeColor.rgb, minLight.rgb);
 
 
-    // gamma correction
-    fragColor.rgb = pow(fragColor.rgb, gamma);
     fragColor.rgb = addClusteredLightsContribution(fragColor.rgb, ecPosition.xyz, N);
     fragColor.rgb = filter_combined(fragColor.rgb);
     fragColor.rgb = mix(hazeColor +secondary_light * fog_backscatter(mvisibility), fragColor.rgb,transmission);
