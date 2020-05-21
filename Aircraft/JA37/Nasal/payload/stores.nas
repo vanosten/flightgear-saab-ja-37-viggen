@@ -708,32 +708,15 @@ var trigger_listener = func {
       # Trigger is pulled, a pylon is selected, and loaded.
       # The gear check is prevent missiles from firing when changing airport location.
       if (fired == "M71 Bomblavett" or fired == "M71 Bomblavett (Retarded)") {
-        var brevity = armament.AIM.active[armSelect-1].brevity;
-
-        armament.AIM.active[armSelect-1].release(radar_logic.complete_list);#print("release "~(armSelect-1));
-
-        var phrase = brevity;
+        var phrase = armament.AIM.active[armSelect-1].brevity;
         if (getprop("payload/armament/msg")) {
           armament.defeatSpamFilter(phrase);
         } else {
           setprop("/sim/messages/atc", phrase);
         }
         fireLog.push("Self: "~phrase);
-        var next = TRUE;
 
-        var ammo = getprop("payload/weight["~(armSelect-1)~"]/ammo");
-        ammo = ammo - 1;
-        setprop("payload/weight["~(armSelect-1)~"]/ammo", ammo);
-        if(ammo > 0) {
-          #next = FALSE;
-        }
-
-        if(next == TRUE) {
-          var newStation = selectTypeBombs(fired, armSelect);
-          if (newStation != -1) {
-            input.stationSelect.setValue(newStation);
-          }
-        }
+        m71_timer.start();
       } elsif (fired == "RB 05A Attackrobot") {
         # Release control from previous missile
         if(last_rb05 != nil) active_rb05[last_rb05] = FALSE;
@@ -806,6 +789,26 @@ var trigger_listener = func {
     }
   }
 }
+
+
+var m71_timer = maketimer(0.1, func {
+    var armSelect = input.stationSelect.getValue();
+    var fired = getprop("payload/weight["~(armSelect-1)~"]/selected");
+
+    armament.AIM.active[armSelect-1].release(radar_logic.complete_list);
+
+    var ammo = getprop("payload/weight["~(armSelect-1)~"]/ammo");
+    ammo = ammo - 1;
+    setprop("payload/weight["~(armSelect-1)~"]/ammo", ammo);
+    var newStation = selectTypeBombs(fired, armSelect);
+    if (newStation == -1) {
+        m71_timer.stop();
+    } else {
+        input.stationSelect.setValue(newStation);
+    }
+});
+
+m71_timer.simulatedTime = 1;
 
 ############ Cannon impact messages #####################
 
