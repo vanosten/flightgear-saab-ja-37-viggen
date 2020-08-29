@@ -1670,6 +1670,9 @@
         <loadout>
             <file>Aircraft/JA37/Nasal/payload/loadout.nas</file>
         </loadout>
+        <target_dimensions>
+            <file>Aircraft/JA37/Nasal/target_dimensions.nas</file>
+        </target_dimensions>
         <formation>
             <file>Aircraft/JA37/Nasal/formation.nas</file>
         </formation>

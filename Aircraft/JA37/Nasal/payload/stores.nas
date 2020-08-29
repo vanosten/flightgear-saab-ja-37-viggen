@@ -849,7 +849,7 @@ var findmultiplayer = func(targetCoord, dist) {
     var tempoDist = MpCoord.direct_distance_to(targetCoord);
     if(dist > tempoDist) {
       dist = tempoDist;
-      SelectedMP = name;
+      SelectedMP = c;
     }
   }
   return SelectedMP;
@@ -869,8 +869,17 @@ var impact_listener = func {
 
       if (target != nil) {
         var typeOrd = ballistic.getNode("name").getValue();
+        var target_callsign = target.getNode("callsign").getValue();
+        var real_hit = target_dimensions.calc_hit_in_target_dimensions(target, impactPos);
 
-        if(target == hit_callsign) {
+        if (real_hit == FALSE) {
+          debug.dump("Pre-calculated hit was not really within the target dimensions");
+          return; # nothing else to do
+        } else {
+          debug.dump("Hit is within the target dimensions");
+        }
+
+        if(target_callsign == hit_callsign) {
           # Previous impacts on same target
           hits_count += 1;
         } else {
@@ -880,7 +889,7 @@ var impact_listener = func {
             hitmessage(typeOrd);
           }
           hits_count = 1;
-          hit_callsign = target;
+          hit_callsign = target_callsign;
           hit_timer = maketimer(1, func{hitmessage(typeOrd);});
           hit_timer.singleShot = 1;
           hit_timer.start();
