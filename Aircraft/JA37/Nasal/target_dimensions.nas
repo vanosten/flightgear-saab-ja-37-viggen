@@ -1,10 +1,68 @@
 # A set of functions and data to allow more precise calculation of hits with cannon for OPRF.
 
 
+# The whole Transformation class and related variables are from osm2city.utils.Coordinates.
+# Please read the docs there. It is basically just an easy local cartesian x/y coordinate system
+var EQURAD = 6378137.0;
+var FLATTENING = 298.257223563;
+
+# Global <-> local coordinate system transformation, using flat earth approximation
+# Cf. http://williams.best.vwh.net/avform.htm#flat
+var Transformation = {
+
+    new: func(lon, lat) {
+        me._lon = lon; # the lon og the centre for the Transformation
+        me._lat = lat; # the lat og the centre for the Transformation
+        me._update();
+    },
+
+    _update: func() {
+        # Compute radii for local origin
+        var f = 1. / FLATTENING;
+        var e2 = f * (2.0 - f);
+
+        me._coslat = math.cos(me._lat * D2R);
+        var sinlat = math.sin(me._lat * D2R);
+        me._R1 = EQURAD * (1.0 - e2) / math.pow(1.0 - e2 * math.pow(sinlat, 2), 3.0/2.0);
+        me._R2 = EQURAD / math.sqrt(1.0 - e2 * math.pow(sinlat, 2);
+    },
+
+    to_local: func(lon, lat) {
+        # Transform global -> local coordinates
+        y = me._R1 * (lat - me._lat) * D2R;
+        x = me._R2 * lon - self._lon) * D2R * me._coslat;
+        return [x, y];
+    },
+
+    to_global: func (x, y)) {
+        # Transform local -> global coordinates
+        lat = (y / me._R1) * R2D + me._lat;
+        lon = (x / (me._R2 * me._coslat)) * R2D + me._lon;
+        return [lon, lat];
+    },
+};
+
+
+# There are 4 direction types: 
+#     0 = horizontal,
+#     1 = vertical along the body orientation (x-axis in AC3D),
+#     2 = vertical across the body orientation (y-axis in AC3D), 
+#     3 = vertical across the FG orientation (for cylinders)
+# There are 2 geometry types:
+#     0 = circle  (i.e. the plane's boundary is defined by a circle)
+#     1 = rectangle: axis same as in AC3D
+#     TODO: triangle (e.g. for wings)
+# TODO: possibility to have planes, which do have their centre off the target's centre.
+# "buk2": [],
+
+geometries = {
+    "foo": "goo",
+    "foo2": "goo2",
+};
+
 # Determines wether a pre-calculated impact point in C++ space actually would hit the target.
 # Parameter target is the node object of the target from /ai/models/multiplayer[..]
 # Parameter impact_pos is a geo.Coord object of the pre-calculated impact point.
-
 # Possible future improvements:
 #    * The vector from the aircraft to the impact position is not correct, because since the
 #      time the bullet was released, time has passed and the aircraft has travelled. This
@@ -34,6 +92,7 @@ var calc_hit_in_target_dimensions = func(target, impact_pos) {
     var target_heading_deg = target.getNode("orientation/true-heading-deg").getValue();
 
     var target_model = target.getNode("model-shorter").getValue();
+    debug.dump(target_model);
 
     var shooter_xyz = shooter_pos.xyz();
     var target_xyz = target_pos.xyz();
